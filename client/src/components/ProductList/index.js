@@ -10,10 +10,13 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 
 import { idbPromise } from "../../utils/helpers";
 
-function ProductList({ }) {
-  const [state, dispatch] = useStoreContext();
+import { useDispatch, useSelector } from 'react-redux';
 
-  const { currentCategory } = state;
+function ProductList({ }) {
+  const dispatch = useDispatch();
+  const products = useSelector(state => state.products);
+
+  const { currentCategory } = useSelector(state => state.currentCategory);
 
   const { loading, data } = useQuery(QUERY_PRODUCTS);
 
