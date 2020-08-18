@@ -42,7 +42,7 @@ const Cart = () => {
         dispatch({type: TOGGLE_CART});
     }
 
-    if (!state.cartOpen) {
+    if (!cartOpen) {
         //alternative if cart closed
         return(
             <div className="cart-closed" onClick={toggleCart}>
@@ -54,7 +54,7 @@ const Cart = () => {
 
     function calculateTotal() {
         let sum = 0;
-        state.cart.forEach(item => {
+        cart.forEach(item => {
           sum += item.price * item.purchaseQuantity;
         });
         return sum.toFixed(2);
@@ -64,7 +64,7 @@ const Cart = () => {
       function submitCheckout() {
         const productIds = [];
       
-        state.cart.forEach((item) => {
+        cart.forEach((item) => {
           for (let i = 0; i < item.purchaseQuantity; i++) {
             productIds.push(item._id);
           }
@@ -78,9 +78,9 @@ const Cart = () => {
     <div className="close" onClick={toggleCart}>[close]</div>
     <h2>Shopping Cart</h2>
     {/* if items in cart */}
-    {state.cart.length ? (
+    {cart.length ? (
       <div>
-        {state.cart.map(item => (
+        {cart.map(item => (
           <CartItem key={item._id} item={item} />
         ))}
         <div className="flex-row space-between">
