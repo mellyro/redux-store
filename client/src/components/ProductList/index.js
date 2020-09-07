@@ -1,40 +1,38 @@
 import React, { useEffect } from "react";
+import { idbPromise } from '../../utils/helpers';
 import { useQuery } from '@apollo/react-hooks';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
 
 import ProductItem from "../ProductItem";
 import { QUERY_PRODUCTS } from "../../utils/queries";
 import spinner from "../../assets/spinner.gif"
-
-import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_PRODUCTS } from '../../utils/actions';
-
-import { idbPromise } from "../../utils/helpers";
-
 import { useDispatch, useSelector } from 'react-redux';
 
-function ProductList({ }) {
+function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector(state => state.products);
 
   const { currentCategory } = useSelector(state => state.currentCategory);
-
+  
   const { loading, data } = useQuery(QUERY_PRODUCTS);
-
+  
   useEffect(() => {
-    if(data) {
+    // if there is data to be stored
+    if (data) {
+      // store the data in the global state object
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products
       });
-  
+
+      // now let's take each product and save it to the indexedDB
       data.products.forEach((product) => {
         idbPromise('products', 'put', product);
       });
-      // add else if to check if `loading` is undefined in `useQuery()` Hook
     } else if (!loading) {
-      // since we're offline, get all of the data from the `products` store
+      // since we are offline, get all of the data from the `products` store
       idbPromise('products', 'get').then((products) => {
-        // use retrieved data to set global state for offline browsing
+        // use retrieved data to set gloval state for offline browsing
         dispatch({
           type: UPDATE_PRODUCTS,
           products: products
@@ -42,12 +40,12 @@ function ProductList({ }) {
       });
     }
   }, [data, loading, dispatch]);
-
+  
   function filterProducts() {
     if (!currentCategory) {
       return products;
     }
-
+  
     return products.filter(product => product.category._id === currentCategory);
   }
 
