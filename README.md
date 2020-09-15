@@ -14,9 +14,9 @@
 <h2 align="center">Page Views</h2>  
 
 <p align='center'>
-    <img src="/src/assets/products.png" alt="products"/>
-    <img src="/src/assets/history.png" alt="history"/>
-    <img src="/src/assets/stripe.png" alt="stripe"/>
+    <img src="/client/src/assets/products.png" alt="products"/>
+    <img src="/client/src/assets/history.png" alt="history"/>
+    <img src="/client/src/assets/stripe.png" alt="stripe"/>
 </p>  
 
 ## Table of Contents
