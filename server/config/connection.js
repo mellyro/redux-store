@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MONGODB_URI = 'mongodb+srv://missadaska19:Dimebox13206!@reduxstore.reol2.mongodb.net/ReduxStore?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://missadaska19:merrychristmas@reduxstore.reol2.mongodb.net/reduxstore?retryWrites=true&w=majority'
 
 mongoose.connect(MONGODB_URI || 'mongodb://localhost/mernshopping', {
   useNewUrlParser: true,
