@@ -15,18 +15,6 @@ const server = new ApolloServer({
   context: authMiddleware
 });
 
-
-const MONGODB_URI = 'mongodb+srv://missadaska19:Dimebox13206!@reduxstore.reol2.mongodb.net/ReduxStore?retryWrites=true&w=majority'
-
-mongoose.connect(MONGODB_URI || 'mongodb://localhost/redux-store', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-
-mongoose.connection.on('connected', () => {
-  console.log('Mongooe is connected!!!');
-});
-
 server.applyMiddleware({ app });
 
 app.use(express.urlencoded({ extended: false }));
